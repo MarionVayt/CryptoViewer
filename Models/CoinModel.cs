@@ -14,7 +14,7 @@ public class CoinModel
     public string Name { get; set; }
     
     [JsonPropertyName("image")]
-    public string Image { get; set; }
+    public string ImageUrl { get; set; }
     
     [JsonPropertyName("current_price")]
     public decimal? CurrentPrice { get; set; }
@@ -22,6 +22,6 @@ public class CoinModel
     [JsonPropertyName("market_cap_rank")]
     public int? Rank { get; set; }
     
-    [JsonPropertyName("price_change")]
-    public double? PriceChange { get; set; }
+    [JsonPropertyName("price_change_percentage_24h")]
+    public double? PriceChangePercentage24H { get; set; }
 }

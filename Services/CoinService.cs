@@ -12,6 +12,7 @@ public class CoinService
     {
         _httpClient = new HttpClient();
         _httpClient.BaseAddress = new Uri("https://api.coingecko.com/api/v3/");
+        _httpClient.DefaultRequestHeaders.Add("User-Agent", "CryptoViewer");
     }
 
     public async Task<List<CoinModel>> GetTopCoins()

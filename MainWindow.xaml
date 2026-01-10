@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="CryptoViewer" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-
+        <DataGrid ItemsSource="{Binding Coins}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Image" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImageUrl}" Width="25" Height="25" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="80" />
+                
+                <DataGridTextColumn Header="Price" Binding="{Binding CurrentPrice, StringFormat={}{0:C}}" Width="100" />
+                
+                <DataGridTextColumn Header="24h Change" Binding="{Binding PriceChangePercentage24H}" Width="100" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
