@@ -12,10 +12,10 @@ public class CoinService
     {
         _httpClient = new HttpClient();
         _httpClient.BaseAddress = new Uri("https://api.coingecko.com/api/v3/");
-        _httpClient.DefaultRequestHeaders.Add("User-Agent", "CryptoViewer");
+        _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "CryptoViewer/1.0");
     }
 
-    public async Task<List<CoinModel>> GetTopCoins()
+    public async Task<List<CoinModel>> GetTopCoinsAsync()
     {
         string url = "coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false";
 
@@ -24,12 +24,18 @@ public class CoinService
             HttpResponseMessage response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
-            var coins = JsonSerializer.Deserialize<List<CoinModel>>(json);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            var coins = JsonSerializer.Deserialize<List<CoinModel>>(json, options);
             return coins ?? new List<CoinModel>();
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine(ex.Message);
+            System.Diagnostics.Debug.WriteLine($"ПОМИЛКА API: {ex.Message}");
             return new List<CoinModel>();
         }
     }

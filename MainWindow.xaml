@@ -1,32 +1,10 @@
 ﻿<Window x:Class="CryptoViewer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CryptoViewer"
-        mc:Ignorable="d"
         Title="CryptoViewer" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
+
     <Grid>
-        <DataGrid ItemsSource="{Binding Coins}"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True"
-                  CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Image" Width="50">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImageUrl}" Width="25" Height="25" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
-                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="80" />
-                
-                <DataGridTextColumn Header="Price" Binding="{Binding CurrentPrice, StringFormat={}{0:C}}" Width="100" />
-                
-                <DataGridTextColumn Header="24h Change" Binding="{Binding PriceChangePercentage24H}" Width="100" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
